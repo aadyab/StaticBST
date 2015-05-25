@@ -72,8 +72,8 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                         currentIndex = currentIndex*2+2;
                 }
 
-            }//while
-        }//else
+            }
+        }
 
         h = (int)(Math.log(mI + 1) / Math.log(2)) + 1;
     }
@@ -196,23 +196,14 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
         LinkedList<Integer> oldlist = new LinkedList<Integer>();
 
         Iterator<Integer> oldIt, newIt;
-
-        // if target node has no children
         if ((targetIndex*2+1 >= tree.length) || (targetIndex*2+2 >= tree.length))
             tree[targetIndex] = null;
-
-            // if target node has no children
         else if ((tree[targetIndex*2+1] == null) && (tree[targetIndex*2+2] == null))
             tree[targetIndex] = null;
 
-            // if target node only has a left child
         else {
             if ((tree[targetIndex * 2 + 1] != null) && (tree[targetIndex * 2 + 2] == null)) {
 
-                // fill newlist with indices of nodes that will replace
-                // the corresponding indices in oldlist
-
-                // fill newlist
                 currentIndex = targetIndex * 2 + 1;
                 templist.addLast(currentIndex);
                 while (!templist.isEmpty()) {
@@ -223,8 +214,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                         templist.addLast(currentIndex * 2 + 2);
                     }
                 }
-
-                // fill oldlist
                 currentIndex = targetIndex;
                 templist.addLast(currentIndex);
                 while (!templist.isEmpty()) {
@@ -235,8 +224,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                         templist.addLast(currentIndex * 2 + 2);
                     }
                 }
-
-                // do replacement
                 oldIt = oldlist.iterator();
                 newIt = newlist.iterator();
                 while (newIt.hasNext()) {
@@ -246,15 +233,9 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                     tree[newIndex] = null;
                 }
             }
-
-            // if target node only has a right child
             else {
                 if ((tree[targetIndex * 2 + 1] == null) && (tree[targetIndex * 2 + 2] != null)) {
 
-                    // fill newlist with indices of nodes that will replace
-                    // the corresponding indices in oldlist
-
-                    // fill newlist
                     currentIndex = targetIndex * 2 + 2;
                     templist.addLast(currentIndex);
                     while (!templist.isEmpty()) {
@@ -265,8 +246,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                             templist.addLast(currentIndex * 2 + 2);
                         }
                     }
-
-                    // fill oldlist
                     currentIndex = targetIndex;
                     templist.addLast(currentIndex);
                     while (!templist.isEmpty()) {
@@ -277,8 +256,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                             templist.addLast(currentIndex * 2 + 2);
                         }
                     }
-
-                    // do replacement
                     oldIt = oldlist.iterator();
                     newIt = newlist.iterator();
                     while (newIt.hasNext()) {
@@ -288,8 +265,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                         tree[newIndex] = null;
                     }
                 }
-
-                // target node has two children
                 else {
                     currentIndex = targetIndex * 2 + 2;
 
@@ -298,17 +273,8 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                     }
 
                     tree[targetIndex] = tree[currentIndex];
-
-                    // the index of the root of the subtree to be replaced
                     int currentRoot = currentIndex;
-
-                    // if currentIndex has a right child
                     if (tree[currentRoot * 2 + 2] != null) {
-
-                        // fill newlist with indices of nodes that will replace
-                        // the corresponding indices in oldlist
-
-                        // fill newlist
                         currentIndex = currentRoot * 2 + 2;
                         templist.addLast(currentIndex);
                         while (!templist.isEmpty()) {
@@ -319,8 +285,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                                 templist.addLast(currentIndex * 2 + 2);
                             }
                         }
-
-                        // fill oldlist
                         currentIndex = currentRoot;
                         templist.addLast(currentIndex);
                         while (!templist.isEmpty()) {
@@ -331,8 +295,6 @@ public class StaticBST<T>  extends ArrayBinaryTree<T> implements BinarySearchTre
                                 templist.addLast(currentIndex * 2 + 2);
                             }
                         }
-
-                        // do replacement
                         oldIt = oldlist.iterator();
                         newIt = newlist.iterator();
                         while (newIt.hasNext()) {
